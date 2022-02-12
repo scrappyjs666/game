@@ -1,0 +1,154 @@
+/* стили элементов, блоков, которые повторяются на разных страницах */
+html,body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #120B2A;
+  cursor: url(/images/pointer1.png), auto;
+  font-family: 'SF-Distantital', 'sans-serif';
+  font-weight: 400;
+}
+
+.hero {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    overflow: hidden;
+}
+
+.playing-field {
+  width: 1500px;
+  height: 700px;
+  border-radius: 25px;
+  background: #3458AE;
+  opacity: 0.8;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.playing-field__img {
+  display: block;
+  width: 195px;
+  height: 110px;
+  transform: rotate(90deg);
+  position: absolute;
+  top: 1%;
+  background: url(/images/model.gif);
+}
+
+.playing-field__obstruction1 {
+  width: 50px;
+  height: 700px;
+  background: #000;
+  position: relative;
+  left: 800px;
+  animation: obstruction 3s infinite linear;
+  opacity: 0.5;
+}
+
+.playing-field__obstruction2 {
+  width: 50px;
+  height: 220px;
+  background: #fff;
+  position: relative;
+  top: -430px;
+  left: 800px;
+  animation: obstruction 3s infinite linear;
+}
+
+@keyframes obstruction {
+	from {
+		margin-left: 800px;
+	}
+	to {
+		margin-left: -1000px;
+	}
+}
+
+.welcome-field {
+  width: 1152px;
+  height: 603px;
+  background: url(/images/welcomeimg.jpg);
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.welcome-field__title {
+  display: grid;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 10px;
+  font-size: 35px;
+}
+
+.welcome-field__button {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border: none;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  outline: none;
+  z-index: 1000;
+  padding: 20px 0;
+  margin: 30px auto 0;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background: rgb(167 72 72 / 88%);
+  color: #e6a833;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0,.5);
+  animation: play_down 1s infinite;
+  transition: all 0.5s;
+  &:hover {
+    color: #e7e35a;
+    background: rgb(213 35 68);
+  }
+}
+
+@keyframes  play_top {
+	0% { box-shadow: 0 0 rgba(0,163,182,.6); }
+	to { box-shadow: 0 0 0 20px rgba(0,163,182,0); }   
+}
+
+@keyframes  play_down {
+	0% { box-shadow: 0 0 rgba(55,55,55,.6); }
+	to { box-shadow: 0 0 0 20px rgba(55,55,55,0); }
+}
+
+
+.welcome-field__aboutgame {
+  padding: 0 20px;
+}
+
+
+.welcome-field__descr {
+  text-indent: 50px;
+  font-family: 'SF-Distantital', 'sans-serif';
+  font-weight: bold;
+  line-height: 1.7;
+  font-size: 25px;
+  &::first-letter {
+    font-size: 35px;
+    font-family: 'SF-Distant', 'sans-serif';
+  }
+}
+
