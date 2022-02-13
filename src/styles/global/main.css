@@ -19,12 +19,9 @@ html,body {
     overflow: hidden;
 }
 
-.playing-field {
+.canvasgame {
   width: 1500px;
   height: 700px;
-  border-radius: 25px;
-  background: #3458AE;
-  opacity: 0.8;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -32,15 +29,6 @@ html,body {
   opacity: 0;
 }
 
-.playing-field__img {
-  display: block;
-  width: 195px;
-  height: 110px;
-  transform: rotate(90deg);
-  position: absolute;
-  top: 1%;
-  background: url(/images/model.gif);
-}
 
 .playing-field__obstruction1 {
   width: 50px;

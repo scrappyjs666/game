@@ -102,48 +102,22 @@ animate();
 
 const btnplay = document.querySelector('.welcome-field__button');
 const welcomefield = document.querySelector('.welcome-field');
-const playfield = document.querySelector('.playing-field');
-const jumping = 0;
 btnplay.addEventListener('click', () => {
   welcomefield.remove();
-  playfield.style.opacity = '0.4';
+  canvasgame.style.opacity = '1';
 })
 
 
 //playing-field
-const obstruction1 = document.querySelector('.playing-field__obstruction1');
-const obstruction2 = document.querySelector('.playing-field__obstruction2');
-const mainmodel = document.querySelector('.playing-field__img');
+const canvasgame = document.querySelector('.canvasgame');
+const ctx = canvasgame.getContext("2d");
 
-obstruction2.addEventListener('animationiteration', () => {
-  let random = -((Math.random()*420)+150);
-  obstruction2.style.top = random + "px";
-});
+const model = new Image();
 
-setInterval(function() {
-  let mainmodelTop = parseInt(window.getComputedStyle(mainmodel).getPropertyValue("top"));
-  if(jumping==0) {
-  mainmodel.style.top = (mainmodelTop+3)+"px";
-  }
-  if(mainmodelTop>700) {
-    // alert('game over');
-  }
-},10);
+model.src = 'images/model.gif';
 
-function jump() {
-  jumping = 1;
-  let jumpCount = 0;
-  let jumpInterval = setInterval(function(){
-    let mainmodelTop = 
-    parseInt(window.getComputedStyle(mainmodel).getPropertyValue("top"));
-    if((mainmodelTop>6)&&(counter<15)){
-    mainmodel.style.top = (mainmodelTop-5)+"px";
-    }
-    if(jumpCount>20) {
-      clearInterval(jumpInterval);
-      jumping = 0;
-      jumpCount = 0;
-    }
-    jumpCount++;
-  },10);
+function draw() {
+  ctx.drawImage(model, 0, 0);
 }
+
+draw();
