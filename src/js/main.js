@@ -1,10 +1,10 @@
 import '../styles/style.css'
-
-import './includes/test'
-
-
+import '../js/world.js'
+import '../js/view.js'
+import '../js/game'
+import '../js/data/levels'
 //bacground
-const canvas = document.querySelector('canvas');
+const canvas = document.querySelector('.canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -104,20 +104,18 @@ const btnplay = document.querySelector('.welcome-field__button');
 const welcomefield = document.querySelector('.welcome-field');
 btnplay.addEventListener('click', () => {
   welcomefield.remove();
-  canvasgame.style.opacity = '1';
 })
 
+//game canvas
+const gameCanvas = document.querySelector('.gameCanvas');
+const context = gameCanvas.getContext("2d");
 
-//playing-field
-const canvasgame = document.querySelector('.canvasgame');
-const ctx = canvasgame.getContext("2d");
 
-const model = new Image();
 
-model.src = 'images/model.gif';
+const game = new Game({
+  world: new World(),
+  view: new View(gameCanvas),
+  levels
+});
 
-function draw() {
-  ctx.drawImage(model, 0, 0);
-}
-
-draw();
+console.log(game);

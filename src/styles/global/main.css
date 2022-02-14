@@ -19,15 +19,18 @@ html,body {
     overflow: hidden;
 }
 
-.canvasgame {
+.gameCanvas {
   width: 1500px;
   height: 700px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
+  opacity: 1;
+  background: brown;
 }
+
+
 
 
 .playing-field__obstruction1 {
@@ -70,6 +73,7 @@ html,body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: none;
 }
 
 .welcome-field__title {
