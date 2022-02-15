@@ -1,8 +1,4 @@
 import '../styles/style.css'
-import '../js/world.js'
-import '../js/view.js'
-import '../js/game'
-import '../js/data/levels'
 //bacground
 const canvas = document.querySelector('.canvas');
 canvas.width = window.innerWidth;
@@ -69,13 +65,13 @@ const colorsArray = [
 
 const circlesArray = [];
 
-for (let i = 0; i <200; i++) {
+for (let i = 0; i <100; i++) {
   let radius = 2.2;
   let x = Math.random() * (window.innerHeight - radius * 2) + radius;
   let y = Math.random() * (window.innerWidth - radius * 2) + radius;
 
-  let dx = (Math.random() - 0.5) * 20;
-  let dy = (Math.random() - 0.5) * 5;
+  let dx = (Math.random() - 0.5) * 10;
+  let dy = (Math.random() - 0.5) * 2.5;
   
   const colorIndex = randomInteger(1, colorsArray.length - 1);
   const shadowIndex = randomInteger(1, shadowArray.length - 1);
@@ -97,25 +93,70 @@ function animate () {
 
 animate();
 
-
 //js hero scripts
-
 const btnplay = document.querySelector('.welcome-field__button');
 const welcomefield = document.querySelector('.welcome-field');
+const ammo = document.querySelector('.ammo');
+const ammoAmount = document.querySelectorAll('.ammo__amount');
 btnplay.addEventListener('click', () => {
   welcomefield.remove();
+  function createbulletimg() {
+    let bulletimg = document.createElement('img');
+    bulletimg.className = 'ammo__amount';
+    bulletimg.setAttribute('src', 'images/bullet.png');
+    ammo.append(bulletimg);
+  }
+  for(let i = 0; i <=10; i ++) {
+    setTimeout(createbulletimg, 700 * i)
+  }
 })
 
 //game canvas
-const gameCanvas = document.querySelector('.gameCanvas');
-const context = gameCanvas.getContext("2d");
+
+const player = document.querySelector('#player');
+const gamefield = document.querySelector('.game-field');
 
 
+// arrowTop code = 38;
+// arrowBottom code =  40;
+// arrowLeft code = 37;
+// arrowRight code = 39;
 
-const game = new Game({
-  world: new World(),
-  view: new View(gameCanvas),
-  levels
-});
+// enter charCode/code =13;
 
-console.log(game);
+document.addEventListener('keydown', movedirection);
+
+function movedirection(event) {
+  if(event.key === 'w' || event.key === 'W' || event.key === 'Ц'|| event.key === 'ц' || event.keyCode === 38) {
+    player.style.top = player.offsetTop - 15 + 'px';
+  }  
+  if(event.key === 's' || event.key === 'S' || event.key === 'Ы'|| event.key === 'ы' || event.keyCode === 40) {
+    player.style.top = player.offsetTop + 15 + 'px';
+  }
+  if(event.key === 'a' || event.key === 'A' || event.key === 'ф'|| event.key === 'Ф'|| event.keyCode === 37) {
+    player.style.left = player.offsetLeft - 15 + 'px';
+  }
+  if(event.key === 'd' || event.key === 'D' || event.key === 'в'|| event.key === 'В'||event.keyCode === 39) {
+    player.style.left = player.offsetLeft + 15 + 'px';
+  }
+  if (event.keyCode === 32) {  
+    setTimeout(createBullet, 500);
+  }  
+}
+
+
+//create bullet function 
+function createBullet() {
+  let bullet = document.createElement('div');
+  bullet.className = 'bullet';
+  bullet.style.top = player.offsetTop + 50 + 'px';
+  bullet.style.left = player.offsetLeft + 150 + 'px';
+  gamefield.appendChild(bullet);
+
+  setInterval(function(){
+    bullet.style.left = bullet.offsetLeft + 25 + 'px';
+    bullet.style.top = bullet.offsettop + 100 + 'px';
+  },50);
+}
+
+

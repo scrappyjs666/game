@@ -17,7 +17,27 @@
   <body>
     <div class="hero">
       <canvas class="canvas"></canvas>
-      <canvas class="gameCanvas"></canvas>
+      <div class="game-field">
+        <img src="/images/heart.png" alt="" class="game-field__heart" />
+        <h2 class="modal__ammo">
+          У тебя есть всего
+          <p class="strong__10">10</p>
+          пуль, чтобы защитить свою принцессу от врагов, расходуй их с
+          умом&nbsp!
+          <button class="modal-ammo__btn">
+            <img
+              draggable="false"
+              src="/images/btnimg.png"
+              alt=""
+              class="ammo-btn__image"
+            />
+          </button>
+        </h2>
+        <div class="ammo"></div>
+        <div class="skin_1" id="player"></div>
+        <div class="enemy"></div>
+        <div class="boom"></div>
+      </div>
       <div class="welcome-field">
         <div class="welcome-field__about">
           <div class="welcome-field-top">
