@@ -19,51 +19,23 @@ html,body {
     overflow: hidden;
 }
 
-.gameCanvas {
-  width: 1500px;
-  height: 700px;
+.enemy {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  background: brown;
+  left: 95%;
+  transform: rotate(270deg);
+  z-index: 99;
+}
+
+@keyframes play {
+  100% {
+    background-position: -345px;
+  }
 }
 
 
-
-
-.playing-field__obstruction1 {
-  width: 50px;
-  height: 700px;
-  background: #000;
-  position: relative;
-  left: 800px;
-  animation: obstruction 3s infinite linear;
-  opacity: 0.5;
-}
-
-.playing-field__obstruction2 {
-  width: 50px;
-  height: 220px;
-  background: #fff;
-  position: relative;
-  top: -430px;
-  left: 800px;
-  animation: obstruction 3s infinite linear;
-}
-
-@keyframes obstruction {
-	from {
-		margin-left: 800px;
-	}
-	to {
-		margin-left: -1000px;
-	}
-}
 
 .game-field {
-  border: 1px solid #fff;
+  box-shadow: 0px 0px 25px 10px;
   width: 1500px;
   height: 700px;
   position: absolute;
@@ -82,11 +54,12 @@ html,body {
   position: absolute;
   top: 40%;
   transform: rotate(90deg);
+  z-index: 100;
 }
 
 .game-field__heart {
   position: absolute;
-  left: 97%;
+  left: 90%;
   top: 1%;
   bacground: rgba(255, 0, 0, 0.8);
   display: block;
@@ -94,6 +67,25 @@ html,body {
   cursor: pointer;
   animation: pulse 2s infinite;
 }
+
+.game-field__heart1 {
+  position: absolute;
+  left: 90%;
+  top: 1%;
+}
+
+.game-field__heart2 {
+  position: absolute;
+  left: 93%;
+  top: 1%;
+}
+
+.game-field__heart3 {
+  position: absolute;
+  left: 96%;
+  top: 1%;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -106,6 +98,7 @@ html,body {
 }
 
 
+
 .ammo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -116,9 +109,10 @@ html,body {
   height: 100px;
 }
 
-.strong__10 {
+.modal__ammo_strong_10 {
   display: inline;
   color: #FFA91E;
+  border-bottom: 2px solid #FFA91E;
 }
 .modal__ammo {
   font-family: 'SF-Distant', 'sans-serif';
@@ -245,3 +239,44 @@ html,body {
   }
 }
 
+
+
+.messageAmmountOff {
+  font-family: 'SF-Distant';
+  color: #fff;
+  font-size: 12px;
+  padding: 4px;
+  text-align: center;
+  user-select:none;
+  box-shadow: 0px 0px 10px 3px #f8f8f8, 0px 0px 10px 3px #f8f8,0px 0px 10px 3px #f82;
+  border-radius: 12px;
+  position: relative;
+  height: 90px;
+  top: 5%;
+  left: 3%;
+}
+
+.messageAmmountBtn {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 6%;
+  left: 75%;
+  cursor: pointer;
+}
+
+.gameTimer {
+  display: grid;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 83%;
+  left: 1%;
+  color: #fff;
+  border-radius: 15px;
+  text-align: center;
+  font-family: 'SF-Distant', 'sans-serif';
+  box-shadow: 0px 0px 10px 3px #f8f8f8, 0px 0px 10px 3px #f8f8,0px 0px 10px 3px #f82;
+  user-select: none;
+}
