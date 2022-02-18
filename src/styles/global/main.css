@@ -26,12 +26,6 @@ html,body {
   z-index: 99;
 }
 
-@keyframes play {
-  100% {
-    background-position: -345px;
-  }
-}
-
 
 
 .game-field {
@@ -46,6 +40,25 @@ html,body {
   display: grid;
   grid-template-columns: repeat(5,1fr);
 }
+
+.game-field__startgame {
+  font-family: 'SF-Distant', 'sans-serif';
+  font-weight: 100;
+  color: #fff;
+  font-size: 70px;
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  cursor: pointer;
+  transform: translate(-35%, -45%);
+  user-select:none;
+  animation: pulse; 
+  animation-duration: 2s; 
+  animation-iteration-count: infinite;
+  display: none;
+}
+
+
 
 #player {
   width: 195px;
@@ -65,7 +78,7 @@ html,body {
   display: block;
   border-radius: 50%;
   cursor: pointer;
-  animation: pulse 2s infinite;
+  animation: pulseheart 2s infinite;
 }
 
 .game-field__heart1 {
@@ -86,7 +99,7 @@ html,body {
   top: 1%;
 }
 
-@keyframes pulse {
+@keyframes pulseheart {
   0% {
     transform: scale(1);
   }
@@ -96,8 +109,6 @@ html,body {
       transform: scale(1,1.1);
   }
 }
-
-
 
 .ammo {
   display: grid;
@@ -114,15 +125,17 @@ html,body {
   color: #FFA91E;
   border-bottom: 2px solid #FFA91E;
 }
+
 .modal__ammo {
   font-family: 'SF-Distant', 'sans-serif';
+  font-weight: 100;
   color: #fff;
   border: 1px solid #fff;
-  height: 120px;
+  height: 100px;
   width: 200px;
   font-size: 14px;
   position: relative;
-  left: 40%;
+  left: 8%;
   top: 1%;
   border-radius: 20px;
   text-align: center;
@@ -131,6 +144,7 @@ html,body {
   user-select:none;
   box-shadow: 0px 0px 10px 3px #f8f8f8, 0px 0px 10px 3px #f8f8,0px 0px 10px 3px #f82;
 }
+
 .modal-ammo__btn {
   position: absolute;
   top: 9%;
@@ -155,8 +169,6 @@ html,body {
   box-shadow: 0 0 5px #fff, 0 0 8px #fff, 0 0 12px #fff, 0 0 15px #e32525, 0 0 25px #db0d0d;
 }
 
-
-
 .welcome-field {
   width: 1152px;
   height: 603px;
@@ -168,7 +180,7 @@ html,body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* display: none; */
+  display:none;
 }
 
 .welcome-field__title {
@@ -177,9 +189,10 @@ html,body {
   margin-bottom: 50px;
   margin-top: 10px;
   font-size: 35px;
+  user-select:none;
 }
 
-.welcome-field__button {
+.button-next {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -189,9 +202,6 @@ html,body {
   border-radius: 40px;
   border: none;
   box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  bottom: 40px;
-  right: 50px;
   outline: none;
   z-index: 1000;
   padding: 20px 0;
@@ -211,6 +221,13 @@ html,body {
   }
 }
 
+.welcome-field__button {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  user-select:none;
+}
+
 @keyframes  play_top {
 	0% { box-shadow: 0 0 rgba(0,163,182,.6); }
 	to { box-shadow: 0 0 0 20px rgba(0,163,182,0); }   
@@ -221,11 +238,9 @@ html,body {
 	to { box-shadow: 0 0 0 20px rgba(55,55,55,0); }
 }
 
-
 .welcome-field__aboutgame {
   padding: 0 20px;
 }
-
 
 .welcome-field__descr {
   text-indent: 50px;
@@ -233,13 +248,83 @@ html,body {
   font-weight: bold;
   line-height: 1.7;
   font-size: 25px;
+  user-select:none;
   &::first-letter {
     font-size: 35px;
     font-family: 'SF-Distant', 'sans-serif';
   }
 }
 
+.setting__field {
+  width: 1200px;
+  height: 900px;
+  background: url(/images/game123.jpg);
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  user-select:none;
+}
 
+.setting__descr {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -50%);
+  font-family: 'SF-Distant','sans-serif';
+  font-size: 32px;
+  text-align: center;
+  color: red;
+  user-select:none;
+}
+
+.setting__controls {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 800px;
+  height: 600px;
+  opacity: 0.5;
+  background-color: #153239;
+  position: absolute;
+  border-radius: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  user-select:none;
+}
+
+.setting-controls__image {
+  display: grid;
+  align-self: flex-end;
+  user-select:none;
+}
+
+.setting-controls__spacebar {
+  font-size: 40px;
+  font-family: math;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0 5px;
+  box-shadow: 1px 1px 10px 1px #000;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  user-select:none;
+}
+
+.setting-field__button {
+  position: absolute;
+  left: 75%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
 
 .messageAmmountOff {
   font-family: 'SF-Distant';
@@ -280,3 +365,4 @@ html,body {
   box-shadow: 0px 0px 10px 3px #f8f8f8, 0px 0px 10px 3px #f8f8,0px 0px 10px 3px #f82;
   user-select: none;
 }
+

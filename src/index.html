@@ -8,6 +8,10 @@
       href="images/icontitle.png"
       class="titleimg"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="index, follow" />
@@ -18,6 +22,9 @@
     <div class="hero">
       <canvas class="canvas"></canvas>
       <div class="game-field">
+        <div class="game-field__startgame animate__animated animate__pulse">
+          START GAME!
+        </div>
         <img
           draggable="false"
           src="/images/heart.png"
@@ -37,10 +44,9 @@
           class="game-field__heart game-field__heart3"
         />
         <h2 class="modal__ammo">
-          У тебя есть всего
+          You only have
           <p class="modal__ammo_strong_10">10</p>
-          пуль, чтобы защитить свою принцессу от врагов, расходуй их с
-          умом&nbsp!
+          bullets, use them wisely
           <button class="modal-ammo__btn">
             <img
               draggable="false"
@@ -63,7 +69,7 @@
             <h1 class="welcome-field__title">
               Welcome to the world of space battles!
             </h1>
-            <button class="welcome-field__button">PLAY</button>
+            <button class="button-next welcome-field__button">NEXT</button>
           </div>
           <div class="welcome-field__aboutgame">
             <h2 class="welcome-field__descr">
@@ -75,12 +81,27 @@
               heroes and meet many sentient species and aliens. Explore the
               galaxy and look for answers to&nbsp;all your questions, trying
               to&nbsp;find out what happened to&nbsp;all of&nbsp;humanity.
-              Communicate with people and other species and uncover all the
-              secrets of&nbsp;this game. Learn new languages ​​spoken
-              by&nbsp;the aliens and get to&nbsp;know their culture.
+              Communicate with and other species and uncover all the secrets
+              of&nbsp;this game. Learn new languages ​​spoken by&nbsp;the aliens
+              and get to&nbsp;know their culture.
             </h2>
           </div>
         </div>
+      </div>
+      <div class="setting__field">
+        <h2 class="setting__descr">
+          Destroy enemy spaceships, for this use the following settings:
+        </h2>
+        <div class="setting__controls">
+          <img
+            draggable="false"
+            src="images/control.png"
+            alt=""
+            class="setting-controls__image"
+          />
+          <div class="setting-controls__spacebar">Spacebar</div>
+        </div>
+        <button class="setting-field__button button-next">NEXT</button>
       </div>
     </div>
     <script type="module" src="./js/main.js"></script>
