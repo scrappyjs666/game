@@ -3,24 +3,32 @@
 
 @font-face {
   font-family: 'SF-Distantital';
-  src: url(../fonts/SF Distant Galaxy Outline Italic.woff),
-  url(../fonts/SF Distant Galaxy Outline Italic.woff2);
+  src: url(/fonts/SF Distant Galaxy Outline Italic.woff),
+  url(/fonts/SF Distant Galaxy Outline Italic.woff2);
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'SF-Distant';
-  src: url(../fonts/SF Distant Galaxy.woff),
-  url(../fonts/SF Distant Galaxy.woff2);
+  src: url(/fonts/SF Distant Galaxy.woff),
+  url(/fonts/SF Distant Galaxy.woff2);
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Starjout';
-  src: url(../fonts/Starjout.woff),
-  url(../fonts/Starjout.woff2);
+  src: url(/fonts/Starjout.woff),
+  url(/fonts/Starjout.woff2);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GameOver';
+  src: url(/fonts/GameOver.woff),
+  url(/fonts/GameOver.woff2);
   font-style: normal;
   font-display: swap;
 }

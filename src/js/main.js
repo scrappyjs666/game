@@ -1,4 +1,5 @@
 import '../styles/style.css'
+import { gsap } from "gsap";
 //bacground
 const canvas = document.querySelector('.canvas');
 canvas.width = window.innerWidth;
@@ -79,7 +80,6 @@ for (let i = 0; i <100; i++) {
   circlesArray.push(new Circle(x, y, radius, dx, dy, colorsArray[colorIndex], 15, shadowArray[shadowIndex]));
 }
 
-console.log(circlesArray);
 
 function animate () {
   requestAnimationFrame(animate);
@@ -116,12 +116,17 @@ btnsetting.addEventListener('click', () => {
 //game setting start
 
 //game field
-
+const startGame = document.querySelector('.game-field__startgame');
+const timer = document.querySelector('.timer');
 const player = document.querySelector('#player');
 const ammo = document.querySelector('.ammo');
 const ammoAmount = document.querySelectorAll('.ammo__amount');
 const modalammoBtn = document.querySelector('.modal-ammo__btn');
+const heartIMG = document.querySelectorAll('.game-field__heart');
+const gameOverfield = document.querySelector('.gameOver-field');
 const hitAudio = new Audio('sound/odinochnyiy-lazernyiy-vyistrel.mp3')
+
+let lifes = 3;
 let enemy = null;
 let bullet = null;
 let interval = null;
@@ -163,33 +168,7 @@ modalammoBtn.addEventListener('click', () => {
   modalammoBtn.parentNode.parentNode.removeChild(modalammoBtn.parentNode);
 })
 
-// gamefield lose ammo = delete ammoimg
-function deleteAmmonimg() {
-  const ammoAmount = document.querySelectorAll('.ammo__amount');
-  ammoAmount[ammoAmount.length - 1].remove();
-  if(ammoAmount.length === 1) {
-    messageAmmountOff();
-  }
-} 
-// message for player ammoOFF
-function messageAmmountOff() {
-  const newtextammo = document.createElement('div');
-  newtextammo.innerHTML = 'Пули закончились, я тебя предупреждал!';
-  newtextammo.className = 'messageAmmountOff';
 
-  const newtextammoBtn = document.createElement('img');
-  newtextammoBtn.setAttribute('src', 'images/btnimg.png');
-  newtextammoBtn.setAttribute('draggable', "false");
-  newtextammoBtn.className = 'messageAmmountBtn';
-  newtextammo.appendChild(newtextammoBtn);
-  ammo.appendChild(newtextammo);
-  newtextammoBtn.addEventListener('click', () => {
-    newtextammoBtn.parentNode.parentNode.removeChild(newtextammoBtn.parentNode);
-  })
-}
-
-// const ammoAmount = document.querySelectorAll('.ammo__amount');
-// if(ammoAmount.length >= 1){}
 
 
   //random enemymodelIMG
@@ -219,11 +198,33 @@ function createEnemy() {
   let enemyimgrandom = enemyimgArray[enemyIndex];
   let randomEnemyTopresult = randomEnemyTop(5, 87);
   let enemy = document.createElement('img');
+  let enemyLeft = enemy.offsetLeft + 2;
   enemy.setAttribute('src', enemyimgrandom);
   enemy.className = 'enemy';
   enemy.style.top = randomEnemyTopresult + '%';
   gamefield.appendChild(enemy);
   enemyMove(enemy);
+  let removeTimer = setInterval(() => {
+    if(enemy.offsetLeft + enemy.width < 99 && lifes > 0 || enemy.offsetTop > player.offsetTop && enemy.offsetTop < player.offsetTop + player.height && enemy.offsetLeft <= player.offsetLeft) {
+    lifes--;
+    removeheartImg();
+    removeEnemy(enemy, 400);
+    }
+  }, 500);
+}
+
+// deleteheartImg
+function removeheartImg() {
+  const heartIMG = document.querySelectorAll('.game-field__heart');
+  heartIMG[heartIMG.length - 1].remove();
+}
+
+//removeEnemy if enemy < gamefield
+function removeEnemy(enemy, time) {
+  enemy.setAttribute('src', 'images/boom.gif');
+  setTimeout(() => {
+  enemy.remove(); 
+  }, time);
 }
 
 //create bullet function 
@@ -238,13 +239,10 @@ function createBullet() {
 
 //create enemyMove 
 function enemyMove(enemy){
-  let randomSpeedresult = randomSpeed(5, 9);
+  let randomSpeedresult = randomSpeed(15, 19);
   setInterval(() => {
   enemy.style.left = enemy.offsetLeft - randomSpeedresult + 'px';
   }, 100); 
-  // if(enemy.offsetLeft < gamefield.clientWidth) {
-  //   enemy.remove();
-  // }
 }
 
 //bulletmove and remove bullet if bullet >= gamefield
@@ -259,6 +257,7 @@ function bulletMove(bullet){
   },30);
 }
 
+//if shot=enemy enemyRemove
 function isShot(bullet) {
   let enemy = document.querySelector('.enemy');
   if(enemy != null) {
@@ -270,21 +269,131 @@ function isShot(bullet) {
 
   let bulletLeft = bullet.offsetLeft + 2;
   let enemyLeft = enemy.offsetLeft + 2;
-
+  let gamefieldLeft = gamefield.offsetLeft;
   if(bulletBottom <= enemyBottom &&  bulletLeft + bullet.offsetWidth >= enemyLeft && bulletLeft <= enemyLeft + enemy.offsetWidth && bulletTop >= enemyTop) {
-    enemy.setAttribute('src', 'images/boom.gif');
-    setTimeout(() => {
-    enemy.remove();
-    }, 1000);
+    removeEnemy(enemy, 700);
     bullet.remove();
     clearInterval(interval);
   }
   }
 }
 
-gamefield.addEventListener('click', function(){
+startGame.addEventListener('click', function(){
+  startGame.style.display = 'none';
+  gameEND();
+  setTimeout(() => {
   createEnemy();
-  setInterval(() => {
+  }, 1000);
+  let enemyTimer = setInterval(() => {
+  const heartIMG = document.querySelectorAll('.game-field__heart');
+  if(lifes < 1) {
+    const b1 = document.querySelectorAll('.enemy');
+    b1.forEach(enemy => enemy.remove());
+    gamveOverResult();
+    clearInterval(enemyTimer);
+  }
   createEnemy();
-  }, 5000);
+  }, 5000 );
+})
+
+function gameEND() {
+  let gameENDtimer = setInterval(() => {
+  if(lifes < 1) {
+    gamefield.style.display = 'none';
+    gameOverfield.style.display = 'grid';
+    gameOverStyles();
+    clearInterval(gameENDtimer);
+  }
+  }, 100);
+}
+
+
+// game timer (result)
+const hourElement = document.querySelector('.hour');
+const minuteElement = document.querySelector('.minute');
+const secondElement = document.querySelector('.second');
+const millisecondElement = document.querySelector('.milliseconds');
+
+let hour = 0;
+let minute = 0;
+let second = 0;
+let millisecond = 0;
+let intervalTimer
+
+startGame.addEventListener('click', () => {
+  clearInterval(intervalTimer);
+  intervalTimer = setInterval(startTimer, 10);
+});
+
+
+
+
+function startTimer() {
+  millisecond++;
+  if(millisecond < 9)  {
+    millisecondElement.innerText = "0" + millisecond;
+  }
+  if(millisecond > 0) {
+    millisecondElement.innerText = millisecond;
+  }
+  if(millisecond> 99) {
+    second++;
+    secondElement.innerText = '0' + second;
+    millisecond = 0;
+    millisecondElement.innerText = '0' + millisecond;
+  }
+  if(second < 9) {
+    secondElement.innerText = '0' + second;
+  }
+  if(second > 9) {
+    secondElement.innerText = second;
+  }
+  if(second > 59) {
+    minute++;
+    minuteElement.innerText = '0' + minute;
+    second = 0;
+    secondElement.innerText = '0' + second;
+  }
+  if(minute > 9) {
+    minuteElement.innerText = minute;
+  }
+  if(hour > 9) {
+    hourElement.innerText = minute;
+  }
+}
+
+
+//gameOver field
+
+
+// resetTimer game if gameOver
+// resetButton.addEventListener('click', () =>{
+//   hour = 0;
+//   minute = 0;
+//   second = 0;
+//   millisecond = 0;
+//   hourElement.textContent = '00';
+//   minuteElement.textContent = '00';
+//   secondElement.textContent = '00';
+//   millisecondElement.textContent = '00';
+// })
+
+const gameOverResult = document.querySelector('.gameOver__result');
+const gameOverGameClose = document.querySelector('.gameOver__GameClose');
+const gameOverText = document.querySelector('.gameOver__text');
+function gamveOverResult() {
+  gameOverResult.innerText = `YOUR SCORE: ${hourElement.textContent}:${minuteElement.textContent}:${secondElement.textContent}:${millisecond}`;
+}
+
+function gameOverStyles() {
+  gsap.from('.inviteInterview', {opacity: 0, duration: 0.5, delay: 1.5, y: -450});
+  gsap.from('.gameOver__text', {opacity: 0, duration: 1, delay: 2, y: -350});
+  gsap.from('.gameOver__result', {opacity: 0, duration: 1.5, delay: 2.5, y: -250});
+  gsap.from('.gameOver__repeat', {opacity: 0, duration: 2, delay: 3, y: -150});
+  gsap.from('.gameOver__buttons', {opacity: 0, duration: 2.5, delay: 3.5, y: -50});
+}
+
+
+gameOverGameClose.addEventListener('click', () => {
+  gsap.to('.gameOver__text', {opacity: 0, duration: 2, delay: 0.5, y: 350});
 })

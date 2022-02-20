@@ -44,9 +44,9 @@
           class="game-field__heart game-field__heart3"
         />
         <h2 class="modal__ammo">
-          You only have
-          <p class="modal__ammo_strong_10">10</p>
-          bullets, use them wisely
+          GOOD
+          <p class="modal__ammo_strong_10">GAME</p>
+          HAVE FUN!
           <button class="modal-ammo__btn">
             <img
               draggable="false"
@@ -59,8 +59,24 @@
         <div class="ammo"></div>
         <div class="skin_1" id="player"></div>
         <div class="gameTimer">
-          <p class="gameRound">ROUND 1</p>
-          <div class="timer">timer</div>
+          <p class="gameRound">Game time</p>
+          <div class="timer">
+            <div class="timer__block">
+              <div class="time hour">00</div>
+            </div>
+            <div class="timer__block">
+              <div class="title"></div>
+              <div class="time minute">00</div>
+            </div>
+            <div class="timer__block">
+              <div class="title"></div>
+              <div class="time second">00</div>
+            </div>
+            <div class="timer__block">
+              <div class="title"></div>
+              <div class="time milliseconds">00</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="welcome-field">
@@ -102,6 +118,38 @@
           <div class="setting-controls__spacebar">Spacebar</div>
         </div>
         <button class="setting-field__button button-next">NEXT</button>
+      </div>
+      <div class="gameOver-field">
+        <div class="inviteInterview">
+          <a
+            href="https://t.me/scrappyzzz"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            ><div class="interview__image">
+              <img
+                src="https://martrending.ru/static/icons/telegramColor.svg"
+                alt="telegram channel"
+                style="width: 28px; height: 23.58px; display: flex"
+              /></div
+          ></a>
+          <a
+            href="https://t.me/scrappyzzz"
+            class="Interview__link"
+            target="_blank"
+            ><div class="Interview__text">Invite for an interview</div></a
+          >
+        </div>
+        <h3 class="gameOver__text">GAME OVER</h3>
+        <div class="gameOver__result"></div>
+        <div class="gameOver__repeat">PLAY AGAIN?</div>
+        <div class="gameOver__buttons">
+          <button
+            class="gameOver__btn gameOver__PlayAgain animate__animated animate__pulse"
+          >
+            YES
+          </button>
+          <button class="gameOver__btn gameOver__GameClose">NO</button>
+        </div>
       </div>
     </div>
     <script type="module" src="./js/main.js"></script>

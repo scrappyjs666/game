@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "normalize.css": "^8.0.1"
+    "gsap": "^3.9.1",
+    "normalize.css": "^8.0.1",
+    "split-text-js": "^1.0.3"
   }
 }
