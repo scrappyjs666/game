@@ -179,16 +179,27 @@ html,body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  display:none;
 }
 
 .welcome-field__title {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  font-family: 'Starjout';
   text-align: center;
   margin-bottom: 50px;
   margin-top: 10px;
   font-size: 35px;
   user-select:none;
+  letter-spacing: 1.5px;
+
+}
+
+.welcome-field__title div{
+	display: inline-block;
+}
+
+.welcome-field__descr div{
+  display: inline-block;
 }
 
 .button-next {
@@ -225,6 +236,7 @@ html,body {
   bottom: 40px;
   right: 50px;
   user-select:none;
+  opacity: 1;
 }
 
 @keyframes  play_top {
@@ -242,16 +254,16 @@ html,body {
 }
 
 .welcome-field__descr {
-  text-indent: 50px;
+  /* text-indent: 50px;
   font-family: 'SF-Distantital', 'sans-serif';
   font-weight: bold;
   line-height: 1.7;
-  font-size: 25px;
+  font-size: 30px;
   user-select:none;
   &::first-letter {
-    font-size: 35px;
+    font-size: 45px;
     font-family: 'SF-Distant', 'sans-serif';
-  }
+  } */
 }
 
 .setting__field {
@@ -381,8 +393,8 @@ html,body {
 
 
 .gameOver-field {
-  display: grid;
-  /* display: none; */
+  /* display: grid; */
+  display: none;
   justify-content: center;
   align-content: center;
   text-align: center;
@@ -448,6 +460,7 @@ html,body {
 .gameOver__buttons {
   display: flex;
   justify-content: space-around;
+  opacity: 1;
 }
 
 .gameOver__btn  {
