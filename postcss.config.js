@@ -5,6 +5,7 @@ module.exports = {
     'postcss-url': {},
     'postcss-normalize': {},
     'postcss-nesting': {},
+    'postcss-extend-rule': {},
     autoprefixer: {}
   }
 };

@@ -1,5 +1,6 @@
 import '../styles/style.css'
 import { gsap } from "gsap";
+import 'animate.css';
 
 //bacground
 const canvas = document.querySelector('.canvas');
@@ -81,7 +82,6 @@ for (let i = 0; i <100; i++) {
   circlesArray.push(new Circle(x, y, radius, dx, dy, colorsArray[colorIndex], 15, shadowArray[shadowIndex]));
 }
 
-
 function animate () {
   requestAnimationFrame(animate);
   
@@ -94,33 +94,34 @@ function animate () {
 
 animate();
 
-
-const startGame = document.querySelector('.game-field__startgame');
-document.addEventListener('click', (event) => {
-    if(event.target.classList.contains('game-field__startgame')) {
-      startGame.style.display = 'none';
-      console.log('1');
-    }
-});
-
-
 //main js
 const gamefield = document.querySelector('.game-field');
-const gamefieldClone = gamefield.cloneNode(true);
 const settingfield = document.querySelector('.setting__field');
 const btnsetting = document.querySelector('.setting-field__button ');
 const hero = document.querySelector('.hero');
 
-//welcome field
+//welcome field const
 const welcomefield = document.querySelector('.welcome-field');
 const welcometitle = document.querySelector('.welcome-field__title');
 const welcomedescr = document.querySelector('.welcome-field__descr');
 const btnwelcome = document.querySelector('.welcome-field__button');
+
+//audio const
 const hitAudio = new Audio('sound/odinochnyiy-lazernyiy-vyistrel.mp3');
 const btnclickAudio =  new Audio('sound/btnclickAudio.mp3');
 const onloadAudio =  new Audio('sound/onloadMainpage.mp3');
 const gameOverAudio = new Audio('sound/gameOver.mp3');
 
+
+//welcome section(first page)
+window.onload = function() {
+  gsap.to('.welcome-field', {duration: 2.5, opacity: 0.6}); 
+  gsap.to('.welcome-field__title', {duration: 3.5, opacity: 1}); 
+  gsap.to('.welcome-field__descr', {duration: 1.5, opacity: 1}); 
+  onloadWelcomTitle();
+  onloadWelcomDescr();
+  gsap.to('.welcome-field__button', {delay: 6, duration: 3.5, opacity: 1}); 
+};
 
 btnwelcome.addEventListener('click', () => {
   btnclickAudio.play();
@@ -134,7 +135,7 @@ btnwelcome.addEventListener('click', () => {
   }, 1000);
 })
 
-
+//split welcome page text and animation him
 const splitText = (el) => {
 	el.innerHTML = el.textContent.replace(/(\S*)/g, m => {
   return `<div class="word">` +
@@ -150,17 +151,6 @@ const splitwelcometitle = splitText(welcometitle);
 function random(min, max){
   return (Math.random() * (max - min)) + min;
 }
-window.onload = function() {
-  gsap.to('.welcome-field', {duration: 2.5, opacity: 0.6}); 
-  setTimeout(() => {
-  // onloadAudio.play();
-  gsap.to('.welcome-field__title', {duration: 3.5, opacity: 1}); 
-  gsap.to('.welcome-field__descr', {duration: 1.5, opacity: 1}); 
-  onloadWelcomTitle();
-  onloadWelcomDescr();
-  gsap.to('.welcome-field__button', {delay: 6, duration: 3.5, opacity: 1}); 
-  }, 1000);
-};
 
 
 function onloadWelcomTitle () {
@@ -200,16 +190,16 @@ function welcomeBtnLeavePage() {
   gsap.to('.welcome-field', {opacity: 0, duration: 2.5});
 }
 
+
 //game setting 
 // GameSetting pop-up style
-
-
 function gameSettingStyle() {
   gsap.from('.setting__descr', {delay: 0.5, duration: 2, ease: "bounce.out", x: 1500 });
   gsap.from('.setting-controls__image', {delay: 0.5, duration: 2, ease: "bounce.out", x: -1500 });
   gsap.from('.setting-controls__spacebar', {delay: 0.5, duration: 2, ease: "bounce.out", x: 1500 });
   gsap.from('.setting-field__button ', {delay: 1, duration: 2, ease: "bounce.out", y: 1500 });
   gsap.from('.setting__field', {opacity: 0, duration: 2.5});
+  onloadAudio.play();
 }
   
 //GameSetting btn settingfield close
@@ -230,16 +220,28 @@ function gameSettingBtnClose() {
 //game field
 const timer = document.querySelector('.timer');
 const player = document.querySelector('#player');
-const ammo = document.querySelector('.ammo');
-const ammoAmount = document.querySelectorAll('.ammo__amount');
+const modalAmmo = document.querySelector('.modal__ammo');
 const modalammoBtn = document.querySelector('.modal-ammo__btn');
 const heartIMG = document.querySelectorAll('.game-field__heart');
 const gameOverfield = document.querySelector('.gameOver-field');
+const startGameBtn = document.querySelector('.game-field__startgame');
+
+// game timer (result)
+const hourElement = document.querySelector('.hour');
+const minuteElement = document.querySelector('.minute');
+const secondElement = document.querySelector('.second');
+const millisecondElement = document.querySelector('.milliseconds');
+
+let hour = 0;
+let minute = 0;
+let second = 0;
+let millisecond = 0;
+let intervalTimer
 
 let lifes = 3;
 let interval = null;
 
-//start game
+//start game section
 //control for game
 document.addEventListener('keydown', movedirection);
 function movedirection(event) {
@@ -263,13 +265,11 @@ function movedirection(event) {
 
 // delete modal window (gamefield)
 modalammoBtn.addEventListener('click', () => {
-  setTimeout(() => {
-    btnclickAudio.play();
-  }, 200);
-  modalammoBtn.parentNode.parentNode.removeChild(modalammoBtn.parentNode);
+  btnclickAudio.play();
+  modalAmmo.style.display = 'none';
 })
 
-  //random enemymodelIMG
+//random enemymodelIMG
 const enemyimgArray = [
   'images/enemy1.png',
   'images/enemy2.png',
@@ -302,13 +302,15 @@ function createEnemy() {
   gamefield.appendChild(enemy);
   enemyMove(enemy);
   let removeTimer = setInterval(() => {
+    if(lifes < 1) {
+      clearInterval(removeTimer);
+    }
     if(
-    enemy.offsetLeft + enemy.width < 99 && lifes > 0 || enemy.offsetTop > player.offsetTop && enemy.offsetTop < player.offsetTop + player.height && enemy.offsetLeft <= player.offsetLeft ) 
+    enemy.offsetLeft + enemy.width < 99  || enemy.offsetTop > player.offsetTop && enemy.offsetTop < player.offsetTop + player.height && enemy.offsetLeft <= player.offsetLeft ) 
     {
     lifes--;
     removeheartImg();
-    removeEnemy(enemy, 500);
-    clearInterval(removeTimer);
+    removeEnemy(enemy, 490);
     }
   }, 500);
 }
@@ -354,7 +356,7 @@ function bulletMove(bullet){
   bullet.remove();
   clearInterval(timer);
     }
-  },30);
+  },35);
 }
 
 //if shot=enemy enemyRemove
@@ -373,36 +375,76 @@ function isShot(bullet) {
   if(bulletBottom <= enemyBottom &&  bulletLeft + bullet.offsetWidth >= enemyLeft && bulletLeft <= enemyLeft + enemy.offsetWidth && bulletTop >= enemyTop) {
     removeEnemy(enemy, 700);
     bullet.remove();
-    clearInterval(interval);
   }
   }
 }
 
 //click for a  startGame
-startGame.addEventListener('click', function(){
-  // startGame.style.display = 'none';
+startGameBtn.addEventListener('click', startGame);
+function startGame() {
+  btnclickAudio.play();
+  lifes = 3;
+  gamefield.insertAdjacentHTML("afterbegin",
+        `<img
+          draggable="false"
+          src="/images/heart.png"
+          alt=""
+          class="game-field__heart game-field__heart1"
+        />
+        <img
+          draggable="false"
+          src="/images/heart.png"
+          alt=""
+          class="game-field__heart game-field__heart2"
+        />
+        <img
+          draggable="false"
+          src="/images/heart.png"
+          alt=""
+          class="game-field__heart game-field__heart3"
+        />`);
+  startGameBtn.style.display = 'none';
   gameEND();
   setTimeout(() => {
   createEnemy();
   }, 1000);
+  IntervalCreateEnemy();
+}
+
+
+//interval for createEnemyFN
+function IntervalCreateEnemy() {
   let enemyTimer = setInterval(() => {
   const heartIMG = document.querySelectorAll('.game-field__heart');
-  if(lifes < 1) {
-    const b1 = document.querySelectorAll('.enemy');
-    b1.forEach(enemy => enemy.remove());
+  if(lifes < 1 || second >=20) {
     clearInterval(enemyTimer);
+    const heartIMG = document.querySelectorAll('.game-field__heart');
+    let enemyTimer30 = setInterval(() => {
+      if(lifes < 1 || second >= 40) {
+        clearInterval(enemyTimer30);
+        let enemyTimer60 = setInterval(() => {
+          createEnemy();
+        }, 1300);
+        clearInterval(enemyTimer60);
+      }
+    createEnemy();
+    }, 1600);
   }
   createEnemy();
-  }, 4000 );
-})
+  }, 3000);
+}
 
 //gameEND(Lose)
 function gameEND() {
   let gameENDtimer = setInterval(() => {
   if(lifes < 1) {
+    const findenemy = document.querySelectorAll('.enemy');
+    findenemy.forEach(enemy => enemy.remove());
+    clearInterval(intervalTimer);
     gameOverAudio.play();
-    gamefield.remove();
+    resetGame();
     clearInterval(gameENDtimer);
+    gamefield.style.display = 'none';
     setTimeout(() => {
       gamveOverResult();
       gameOverfield.style.display = 'grid';
@@ -413,19 +455,19 @@ function gameEND() {
   }, 100);
 }
 
-// game timer (result)
-const hourElement = document.querySelector('.hour');
-const minuteElement = document.querySelector('.minute');
-const secondElement = document.querySelector('.second');
-const millisecondElement = document.querySelector('.milliseconds');
+function resetGame() {
+    setTimeout(() => {
+    const findenemy = document.querySelectorAll('.enemy');
+    findenemy.forEach(enemy => enemy.remove()); 
+    timerReset();
+    }, 4000);
+    player.style.top = '40%';
+    player.style.left = '0%';
+    startGameBtn.style.display = 'grid';
+    modalAmmo.style.display = 'block';
+}
 
-let hour = 0;
-let minute = 0;
-let second = 0;
-let millisecond = 0;
-let intervalTimer
-
-startGame.addEventListener('click', () => {
+startGameBtn.addEventListener('click', () => {
   clearInterval(intervalTimer);
   intervalTimer = setInterval(startTimer, 10);
 });
@@ -482,7 +524,6 @@ function gameOverStyles() {
   gsap.from('.gameOver__buttons', { opacity: 0 , duration: 4, delay: 2});
 }
 
-
 //gameOver btn gameClose
 gameOverGameClose.addEventListener('click', gameOverBtnCloseStyle);
 function gameOverBtnCloseStyle() {
@@ -499,19 +540,24 @@ function gameOverBtnCloseStyle() {
 
 function gameAgainBtnStyle() {
   gsap.to('.gameOver-field', { opacity: 0 , duration: 4});
-  gsap.to('.inviteInterview', {duration: 4, delay:0.7, ease: "slow(0.7, 0.7, false)", y: -1500 });
+  gsap.to('.inviteInterview', {duration: 4, delay: 0.2, ease: "slow(0.7, 0.7, false)", y: -1500 });
   gsap.to('.gameOver__text', {duration: 3.5, delay:0.6, ease: "slow(0.7, 0.7, false)", y: -1500 });
-  gsap.to('.gameOver__result', {duration: 3, delay: 0.5 , ease: "slow(0.7, 0.7, false)", y: -1500 });
-  gsap.to('.gameOver__repeat', {duration: 2.5, delay:0.4, ease: "slow(0.7, 0.7, false)", y: -1500 });
-  gsap.to('.gameOver__buttons', { opacity: 0 , duration: 4, delay: 2});
+  gsap.to('.gameOver__result', {duration: 3, delay: 0.8 , ease: "slow(0.7, 0.7, false)", y: -1500 });
+  gsap.to('.gameOver__repeat', {duration: 2.5, delay: 1, ease: "slow(0.7, 0.7, false)", y: -1500 });
+  gsap.to('.gameOver__buttons', {duration: 3, delay: 1.2, ease: "slow(0.7, 0.7, false)", y: -1500 });
+  gsap.to('.gameOver-field', { opacity: 0 , delay: 5});
+  gsap.from('.inviteInterview', { delay: 5, y: 0 });
+  gsap.from('.gameOver__text', { delay: 5, y: 0 });
+  gsap.from('.gameOver__result', { delay: 5, y: 0 });
+  gsap.from('.gameOver__repeat', { delay: 5, y: 0 });
+  gsap.from('.gameOver__buttons', { delay: 5, y: 0 });
 }
 
 gameOverPlayAgain.addEventListener('click', () => {
   gameAgainBtnStyle();
-  timerReset();
   setTimeout(() => {
-    gameOverfield.style.display = 'grid';
-    createGame();
+    gameOverfield.style.display = 'none';
+    gamefield.style.display = 'grid';
   }, 4000);
 })
 
@@ -526,8 +572,5 @@ function timerReset() {
   millisecondElement.textContent = '00';
 }
 
-function createGame() {
-  hero.prepend(gamefieldClone);
-  gameOverfield.style.display = 'none';
-}
+
 

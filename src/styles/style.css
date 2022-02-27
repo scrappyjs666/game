@@ -1,9 +1,9 @@
 /* Глобальные стили */
-@import './global/fonts.css';
-@import './global/vars.css';
-@import './global/base.css';
-@import './global/ui.css';
-@import './global/main.css';
+@import "normalize.css";
+@import url('./global/fonts.css');
+@import url('./global/vars.css');
+@import url('./global/base.css');
+@import url('./global/ui.css');
+@import url('./global/main.css');
 
-/* Стили для каждой отдельной страницы */
-@import './pages/index.css';
+

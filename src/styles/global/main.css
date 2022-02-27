@@ -37,8 +37,8 @@ html,body {
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
-  display: grid;
-  /* display: none; */
+  /* display: grid; */
+  display: none;
   grid-template-columns: repeat(5,1fr);
   opacity: 0.9;
 }
@@ -119,7 +119,7 @@ html,body {
   height: 100px;
 }
 
-.modal__ammo_strong_10 {
+.modal__ammo_strong {
   display: inline;
   color: #FFA91E;
   border-bottom: 2px solid #FFA91E;
@@ -180,7 +180,6 @@ html,body {
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  display: none;
 }
 
 .welcome-field__title {
@@ -513,3 +512,5 @@ html,body {
   margin-left: 15px;
   border-bottom: 1px solid #fff;
 }
+
+
