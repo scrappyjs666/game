@@ -501,6 +501,7 @@ html,body {
 }
 
 .Interview__text {
+  font-family: math;
   margin-left: 15px;
   border-bottom: 1px solid #fff;
 }
