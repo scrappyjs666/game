@@ -108,10 +108,10 @@ const welcomedescr = document.querySelector('.welcome-field__descr');
 const btnwelcome = document.querySelector('.welcome-field__button');
 
 //audio const
-const hitAudio = new Audio('sound/odinochnyiy-lazernyiy-vyistrel.mp3');
-const btnclickAudio =  new Audio('sound/btnclickAudio.mp3');
-const onloadAudio =  new Audio('sound/onloadMainpage.mp3');
-const gameOverAudio = new Audio('sound/gameOver.mp3');
+const hitAudio = new Audio('/sound/odinochnyiy-lazernyiy-vyistrel.mp3');
+const btnclickAudio =  new Audio('/sound/btnclickAudio.mp3');
+const onloadAudio =  new Audio('/sound/onloadMainpage.mp3');
+const gameOverAudio = new Audio('/sound/gameOver.mp3');
 
 
 //welcome section(first page)
