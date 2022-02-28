@@ -39,7 +39,6 @@ html,body {
   border-radius: 20px;
   /* display: grid; */
   display: none;
-  grid-template-columns: repeat(5,1fr);
   opacity: 0.9;
 }
 
@@ -73,7 +72,6 @@ html,body {
   position: absolute;
   left: 90%;
   top: 1%;
-  bacground: rgba(255, 0, 0, 0.8);
   display: block;
   border-radius: 50%;
   cursor: pointer;
@@ -103,20 +101,10 @@ html,body {
     transform: scale(1);
   }
     50% {
-      -moz-box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.6);;
-      box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.6);;
+      -moz-box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.6);
+      box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.6);
       transform: scale(1,1.1);
   }
-}
-
-.ammo {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  position: absolute;
-  left: 1%;
-  top: 1%;
-  width: 70px;
-  height: 100px;
 }
 
 .modal__ammo_strong {
@@ -134,7 +122,7 @@ html,body {
   width: 200px;
   font-size: 18px;
   position: relative;
-  left: 8%;
+  left: 1%;
   top: 1%;
   border-radius: 20px;
   text-align: center;
@@ -173,7 +161,6 @@ html,body {
   height: 603px;
   background: url(/images/welcomeimg.jpg);
   background-repeat: no-repeat;
-  opacity: 0.8;
   border-radius: 20px;
   position: absolute;
   left: 50%;
@@ -203,6 +190,7 @@ html,body {
 
 .button-next {
   display: flex;
+  letter-spacing: 2px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -210,7 +198,6 @@ html,body {
   height: 80px;
   border-radius: 40px;
   border: none;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
   outline: none;
   z-index: 1000;
   padding: 20px 0;
@@ -234,7 +221,7 @@ html,body {
   position: fixed;
   bottom: 40px;
   right: 50px;
-  user-select:none;
+  user-select: none;
   opacity: 0;
 }
 
@@ -260,7 +247,8 @@ html,body {
   font-family: 'SF-Distantital', 'sans-serif';
   font-weight: bold;
   line-height: 1.4;
-  font-size: 30px;
+  letter-spacing: 1px;
+  font-size: 25px;
   user-select:none;
   &::first-letter {
     font-size: 65px;
@@ -371,7 +359,7 @@ html,body {
 .gameTimer {
   display: grid;
   align-items: center;
-  width: 100px;
+  width: 130px;
   height: 100px;
   position: absolute;
   top: 83%;

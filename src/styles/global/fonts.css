@@ -3,16 +3,16 @@
 
 @font-face {
   font-family: 'SF-Distantital';
-  src: url(/fonts/SF Distant Galaxy Outline Italic.woff),
-  url(/fonts/SF Distant Galaxy Outline Italic.woff2);
+  src: url(/fonts/SFDistantGalaxy.woff),
+  url(/fonts/SFDistantGalaxy.woff2);
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'SF-Distant';
-  src: url(/fonts/SF Distant Galaxy.woff),
-  url(/fonts/SF Distant Galaxy.woff2);
+  src: url(/fonts/SFDistantGalaxyOutlineItalic.woff),
+  url(/fonts/SFDistantGalaxyOutlineItalic.woff2);
   font-style: normal;
   font-display: swap;
 }

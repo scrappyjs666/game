@@ -1,4 +1,5 @@
-import '../styles/style.css'
+import '../styles/style.css';
+import './includes/test';
 import { gsap } from "gsap";
 import 'animate.css';
 
@@ -85,7 +86,7 @@ for (let i = 0; i <100; i++) {
 function animate () {
   requestAnimationFrame(animate);
   
-  c.clearRect(0, 0, window.innerWidth, window.innerHeight)
+  c.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
   for (let i = 0; i < circlesArray.length; i++) {
     circlesArray[i].draw();
@@ -97,7 +98,7 @@ animate();
 //main js
 const gamefield = document.querySelector('.game-field');
 const settingfield = document.querySelector('.setting__field');
-const btnsetting = document.querySelector('.setting-field__button ');
+const btnsetting = document.querySelector('.setting-field__button');
 const hero = document.querySelector('.hero');
 
 //welcome field const
@@ -133,7 +134,7 @@ btnwelcome.addEventListener('click', () => {
   gameSettingStyle();
   }, 3000);
   }, 1000);
-})
+});
 
 //split welcome page text and animation him
 const splitText = (el) => {
@@ -163,7 +164,7 @@ function onloadWelcomTitle () {
 		z: random(-500, 500),
 		delay: idx * 0.2,
 		repeat: 0,
-	})
+	});
 });
 }
 
@@ -177,13 +178,11 @@ function onloadWelcomDescr() {
 		z: random(-500, 500),
 		delay: idx * 0.02,
 		repeat: 0,
-	})
+	});
 });
-
 }
 
 function welcomeBtnLeavePage() {
-  let tl = gsap.timeline({defaults: {duration: 2, ease: "bounce.out"}});
   gsap.to('.welcome-field__title', {delay: 0.5, duration: 2, ease: "bounce.out", x: 1500 });
   gsap.to('.welcome-field__descr', {delay: 1, duration: 2, ease: "bounce.out", x: -1500 });
   gsap.to('.welcome-field__button', {delay: 1, duration: 2, ease: "bounce.out", y: 1500 });
@@ -236,7 +235,7 @@ let hour = 0;
 let minute = 0;
 let second = 0;
 let millisecond = 0;
-let intervalTimer
+let intervalTimer = null;
 
 let lifes = 3;
 let interval = null;
@@ -246,16 +245,16 @@ let interval = null;
 document.addEventListener('keydown', movedirection);
 function movedirection(event) {
   if(player.offsetTop -145 >= gamefield.offsetTop || event.key === 'w' || event.key === 'W' || event.key === 'Ц'|| event.key === 'ц' || event.keyCode === 38) {
-    player.style.top = player.offsetTop - 25 + 'px';
+    player.style.top = player.offsetTop - 30 + 'px';
   }  
   if(player.offsetTop <= 5 || event.key === 's' || event.key === 'S' || event.key === 'Ы'|| event.key === 'ы' || event.keyCode === 40) {
-    player.style.top = player.offsetTop + 25 + 'px';
+    player.style.top = player.offsetTop + 30 + 'px';
   }
   if(player.offsetLeft >= gamefield.offsetLeft + 200 || event.key === 'a' || event.key === 'A' || event.key === 'ф'|| event.key === 'Ф'|| event.keyCode === 37) {
-    player.style.left = player.offsetLeft - 25 + 'px';
+    player.style.left = player.offsetLeft - 30 + 'px';
   }
   if(player.offsetLeft <= -10  || event.key === 'd' || event.key === 'D' || event.key === 'в'|| event.key === 'В'||event.keyCode === 39) {
-    player.style.left = player.offsetLeft + 25 + 'px';
+    player.style.left = player.offsetLeft + 30 + 'px';
   }
   if (event.keyCode === 32) { 
     hitAudio.play();
@@ -267,7 +266,7 @@ function movedirection(event) {
 modalammoBtn.addEventListener('click', () => {
   btnclickAudio.play();
   modalAmmo.style.display = 'none';
-})
+});
 
 //random enemymodelIMG
 const enemyimgArray = [
@@ -277,7 +276,7 @@ const enemyimgArray = [
   'images/enemy4.png',
   'images/enemy5.png',
   'images/enemy7.png',
-]
+];
 
 //random acceleration enemy model
 function randomSpeed(min, max) {
@@ -294,7 +293,7 @@ function createEnemy() {
   const enemyIndex = randomInteger(1, enemyimgArray.length - 1);
   let enemyimgrandom = enemyimgArray[enemyIndex];
   let randomEnemyTopresult = randomEnemyTop(7, 80);
-  let enemy = document.createElement('img')
+  let enemy = document.createElement('img');
   let enemyLeft = enemy.offsetLeft - 2;
   enemy.setAttribute('src', enemyimgrandom);
   enemy.className = 'enemy';
@@ -329,7 +328,7 @@ function removeEnemy(enemy, time) {
   }, time);
 }
 
-//create bullet function 
+// create bullet function 
 function createBullet() {
   let bullet = document.createElement('div');
   bullet.className = 'bullet';
@@ -359,7 +358,7 @@ function bulletMove(bullet){
   },35);
 }
 
-//if shot=enemy enemyRemove
+// if shot=enemy enemyRemove
 function isShot(bullet) {
   let enemy = document.querySelector('.enemy');
   if(enemy != null) {
@@ -379,7 +378,7 @@ function isShot(bullet) {
   }
 }
 
-//click for a  startGame
+// click for a  startGame
 startGameBtn.addEventListener('click', startGame);
 function startGame() {
   btnclickAudio.play();
@@ -412,7 +411,7 @@ function startGame() {
 }
 
 
-//interval for createEnemyFN
+// interval for createEnemyFN
 function IntervalCreateEnemy() {
   let enemyTimer = setInterval(() => {
   const heartIMG = document.querySelectorAll('.game-field__heart');
@@ -423,9 +422,11 @@ function IntervalCreateEnemy() {
       if(lifes < 1 || second >= 40) {
         clearInterval(enemyTimer30);
         let enemyTimer60 = setInterval(() => {
+          if(lifes < 1) {
+          clearInterval(enemyTimer60);
+        }
           createEnemy();
-        }, 1300);
-        clearInterval(enemyTimer60);
+        }, 1400);
       }
     createEnemy();
     }, 1600);
@@ -434,7 +435,7 @@ function IntervalCreateEnemy() {
   }, 3000);
 }
 
-//gameEND(Lose)
+// gameEND(Lose)
 function gameEND() {
   let gameENDtimer = setInterval(() => {
   if(lifes < 1) {
@@ -506,7 +507,7 @@ function startTimer() {
   }
 }
 
-//game Over field
+// game Over field
 const gameOverResult = document.querySelector('.gameOver__result');
 const gameOverGameClose = document.querySelector('.gameOver__GameClose');
 const gameOverPlayAgain = document.querySelector('.gameOver__PlayAgain');
@@ -515,7 +516,7 @@ function gamveOverResult() {
   gameOverResult.innerText = `YOUR SCORE: ${hourElement.textContent}:${minuteElement.textContent}:${secondElement.textContent}:${millisecond}`;
 }
 
-//Gameover pop-up style
+// Gameover pop-up style
 function gameOverStyles() {
   gsap.from('.inviteInterview', {duration: 4, delay:0.7, ease: "slow(0.7, 0.7, false)", y: -1500 });
   gsap.from('.gameOver__text', {duration: 3.5, delay:0.6, ease: "slow(0.7, 0.7, false)", y: -1500 });
@@ -524,7 +525,7 @@ function gameOverStyles() {
   gsap.from('.gameOver__buttons', { opacity: 0 , duration: 4, delay: 2});
 }
 
-//gameOver btn gameClose
+// gameOver btn gameClose
 gameOverGameClose.addEventListener('click', gameOverBtnCloseStyle);
 function gameOverBtnCloseStyle() {
   gsap.to('.inviteInterview', {delay: 2, duration: 3.5, ease: "bounce.out", y: 1500 });
@@ -559,7 +560,7 @@ gameOverPlayAgain.addEventListener('click', () => {
     gameOverfield.style.display = 'none';
     gamefield.style.display = 'grid';
   }, 4000);
-})
+});
 
 function timerReset() {
   hour = 0;
