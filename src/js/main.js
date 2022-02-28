@@ -270,12 +270,12 @@ modalammoBtn.addEventListener('click', () => {
 
 //random enemymodelIMG
 const enemyimgArray = [
-  'images/enemy1.png',
-  'images/enemy2.png',
-  'images/enemy3.png',
-  'images/enemy4.png',
-  'images/enemy5.png',
-  'images/enemy7.png',
+  '/images/enemy1.png',
+  '/images/enemy2.png',
+  '/images/enemy3.png',
+  '/images/enemy4.png',
+  '/images/enemy5.png',
+  '/images/enemy7.png',
 ];
 
 //random acceleration enemy model
@@ -322,7 +322,7 @@ function removeheartImg() {
 
 //removeEnemy if enemy < gamefield
 function removeEnemy(enemy, time) {
-  enemy.setAttribute('src', 'images/boom.gif');
+  enemy.setAttribute('src', '/images/boom.gif');
   setTimeout(() => {
   enemy.remove(); 
   }, time);
