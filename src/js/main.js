@@ -270,12 +270,12 @@ modalammoBtn.addEventListener('click', () => {
 
 //random enemymodelIMG
 const enemyimgArray = [
-  'images/enemy1.png',
-  'images/enemy2.png',
-  'images/enemy3.png',
-  'images/enemy4.png',
-  'images/enemy5.png',
-  'images/enemy7.png',
+  '../../src/images/enemy1.png',
+  '../../src/images/enemy2.png',
+  '../../src/images/enemy3.png',
+  './images/enemy4.png',
+  '../images/enemy5.png',
+  '../images/enemy7.png',
 ];
 
 //random acceleration enemy model
@@ -386,19 +386,19 @@ function startGame() {
   gamefield.insertAdjacentHTML("afterbegin",
         `<img
           draggable="false"
-          src="images/heart.png"
+          src="/images/heart.png "
           alt=""
           class="game-field__heart game-field__heart1"
         />
         <img
           draggable="false"
-          src="images/heart.png"
+          src="./images/heart.png"
           alt=""
           class="game-field__heart game-field__heart2"
         />
         <img
           draggable="false"
-          src="images/heart.png"
+          src="../images/heart.png"
           alt=""
           class="game-field__heart game-field__heart3"
         />`);
