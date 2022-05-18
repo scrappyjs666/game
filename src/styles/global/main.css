@@ -20,6 +20,7 @@ html,body {
 }
 
 .enemy {
+  will-change: transform;
   position: absolute;
   left: 95%;
   transform: rotate(270deg);
@@ -37,8 +38,8 @@ html,body {
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
-  /* display: grid; */
-  display: none;
+  display: grid;
+  /* display: none; */
   opacity: 0.9;
 }
 
@@ -59,12 +60,13 @@ html,body {
 }
 
 #player {
+  will-change: transform;
   width: 195px;
   height: 110px;
   background: url(/images/model.gif);
   position: absolute;
   top: 40%;
-  transform: rotate(90deg);
+  transform: rotate(90deg) translate(10px, 10px);
   z-index: 100;
 }
 
@@ -148,6 +150,7 @@ html,body {
 }
 
 .bullet {
+  will-change: transform;
   width: 15px;
   height: 5px;
   background: #fefbfe;
@@ -157,6 +160,7 @@ html,body {
 }
 
 .welcome-field {
+  display: none;
   width: 1152px;
   height: 603px;
   background: url(/images/welcomeimg.jpg);

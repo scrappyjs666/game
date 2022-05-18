@@ -355,7 +355,7 @@ function bulletMove(bullet){
   bullet.remove();
   clearInterval(timer);
     }
-  },35);
+  },25);
 }
 
 // if shot=enemy enemyRemove
