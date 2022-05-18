@@ -386,19 +386,19 @@ function startGame() {
   gamefield.insertAdjacentHTML("afterbegin",
         `<img
           draggable="false"
-          src="images/heart.png"
+          src="/images/heart.png"
           alt=""
           class="game-field__heart game-field__heart1"
         />
         <img
           draggable="false"
-          src="images/heart.png"
+          src="./images/heart.png"
           alt=""
           class="game-field__heart game-field__heart2"
         />
         <img
           draggable="false"
-          src="images/heart.png"
+          src="../images/heart.png"
           alt=""
           class="game-field__heart game-field__heart3"
         />`);
